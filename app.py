@@ -21,6 +21,9 @@ def register():
         password = request.form.get('password')
         subscription_level = request.form.get('subscription_level')
         
+        if not password:
+            return jsonify({'error': 'Password is required'}), 400
+
         # Проверка, существует ли уже такой пользователь
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
