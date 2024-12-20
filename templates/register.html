@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Регистрация</h2>
+<form action="/register" method="post">
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <label for="subscription_level">Уровень подписки:</label>
+    <select id="subscription_level" name="subscription_level">
+        <option value="basic">Базовый</option>
+        <option value="premium">Премиум</option>
+    </select>
+    <br>
+    <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Добавить ресурс</h2>
+<form method="POST">
+    <label for="name">Название ресурса:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="access_level">Уровень доступа:</label>
+    <select id="access_level" name="access_level" required>
+        <option value="basic">Basic</option>
+        <option value="premium">Premium</option>
+    </select><br><br>
+    
+    <label for="available_hours">Доступные часы (например, 09:00-18:00):</label>
+    <input type="text" id="available_hours" name="available_hours" required><br><br>
+    
+    <button type="submit">Добавить ресурс</button>
+</form>
+{% endblock %}

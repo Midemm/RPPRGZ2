@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ resource.name }}</h2>
+<p>Уровень доступа: {{ resource.access_level }}</p>
+<p>Доступное время: {{ resource.available_hours }}</p>
+{% endblock %}

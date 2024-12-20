@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Список ресурсов</h2>
+<ul>
+    {% for resource in resources %}
+    <li>
+        <strong>{{ resource.name }}</strong><br>
+        Уровень доступа: {{ resource.access_level }}<br>
+        Доступные часы: {{ resource.available_hours }}
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{{ url_for('add_resource') }}">Добавить новый ресурс</a>
+{% endblock %}
