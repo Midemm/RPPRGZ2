@@ -17,6 +17,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        data = request.get_json()
         username = request.form.get('username')
         password = request.form.get('password')
         subscription_level = request.form.get('subscription_level')
@@ -36,7 +37,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('login'))  # После регистрации перенаправляем на страницу логина
+        return jsonify({'message': 'Пользователь создан'}), 201  
     
     return render_template('register.html')
 
@@ -44,16 +45,20 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        data = request.get_json()
         username = request.form.get('username')
         password = request.form.get('password')
+
+        if not username or not password:
+            return jsonify({'error': 'Требуются имя пользователя и пароль'}), 400
 
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             session['user_id'] = user.id  # Сохраняем id пользователя в сессии
-            return redirect(url_for('resources'))  # Перенаправляем на страницу ресурсов
+            return jsonify({'message': 'Успешный вход'}), 200  # Перенаправляем на страницу ресурсов
         else:
             return "Неверное имя пользователя или пароль", 400  # Ошибка при неправильном пароле
-    
+
     return render_template('login.html')
 
 # Маршрут для страницы добавления ресурса
